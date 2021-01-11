@@ -6,4 +6,13 @@
 
     <h1>Page d'accueil</h1>
 
+    <h2>Articles populaires</h2>
+    <div class="row">
+        {% for article in popularArticles %}
+            <div class="col-md-4 col-lg-3">
+                {% include 'blog/_article_card.html.twig' with { article: article } only %}
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

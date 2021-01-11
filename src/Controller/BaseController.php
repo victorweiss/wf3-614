@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,15 @@ class BaseController extends AbstractController
     /**
      * @Route("/", name="accueil")
      */
-    public function accueil(): Response
+    public function accueil(
+        ArticleRepository $articleRepository
+    ): Response
     {
-        return $this->render('base/accueil.html.twig');
+        $popularArticles = $articleRepository->findPopularArticles(3);
+
+        return $this->render('base/accueil.html.twig', [
+            'popularArticles' => $popularArticles,
+        ]);
     }
 
     /**

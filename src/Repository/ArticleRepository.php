@@ -25,4 +25,12 @@ class ArticleRepository extends ServiceEntityRepository
             [ 'views' => 'DESC' ]
         );
     }
+
+    public function findPopularArticles(int $limit = 3) {
+        return $this->findBy(
+            [ 'status' => Article::STATUS_PUBLISHED ],
+            [ 'views' => 'desc' ],
+            $limit
+        );
+    }
 }
